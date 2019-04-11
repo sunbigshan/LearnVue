@@ -17,10 +17,12 @@ class Observer {
 }
 
 function defineReactive(data, key, val) {
+    let dep = new Dep();
     Object.defineProperty(data, key, {
         enumerable: true,
         configurable: true,
         get() {
+            dep.depend();
             return val;
         },
         set(newVal) {
@@ -28,6 +30,7 @@ function defineReactive(data, key, val) {
                 return;
             }
             val = newVal;
+            dep.nodify()
         }
     })
 }

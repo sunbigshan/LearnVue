@@ -137,5 +137,5 @@ new Watcher(person, 'name', function(newVal, oldVal) {
     console.log(newVal, oldVal);
 })
 
-person.name = 'test';
-person.name = 'test2';
+person.name = 'test'; // test dashan
+person.name = 'test2'; // test2 test

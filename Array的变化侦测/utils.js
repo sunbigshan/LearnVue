@@ -3,7 +3,7 @@ function def(obj, key, val, enumerable) {
         value: val,
         enumerable: !!enumerable,
         configurable: true,
-        writable: true,
+        writable: true,s
     })
 }
 

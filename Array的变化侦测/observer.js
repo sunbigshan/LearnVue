@@ -1,9 +1,16 @@
+const hasProto = '__proto__' in {};
+const arraykeys = Object.getOwnPropertyNames(arrayMethods);
+
 class Observer {
     constructor(value) {
         this.value = value;
 
         if(Array.isArray(value)) {
-            
+            if(hasProto) {
+                value.__proto__ = arrayMethods;
+            }else{
+                copyAugument(value, arrayMethods, arraykeys)
+            }
         }else{
             this.walk(value);
         }
@@ -16,7 +23,17 @@ class Observer {
     }
 }
 
+function copyAugument(target, src, keys) {
+    for(let i = 0, len = keys.length; i < len; i++) {
+        const key = keys[i];
+        def(target, key, src[key]);
+    }
+}
+
 function defineReactive(data, key, val) {
+    if(typeof val === 'object') {
+        new Observer(val);
+    }
     let dep = new Dep();
     Object.defineProperty(data, key, {
         enumerable: true,
@@ -30,7 +47,7 @@ function defineReactive(data, key, val) {
                 return;
             }
             val = newVal;
-            dep.nodify()
+            dep.notify()
         }
     })
 }

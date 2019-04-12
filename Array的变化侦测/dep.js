@@ -17,7 +17,7 @@ class Dep {
         }
     }
 
-    nodify() {
+    notify() {
         const subs = this.subs.slice();
         for(let i = 0, len = subs.length; i < len; i++) {
             subs[i].update();

@@ -7,12 +7,15 @@
     <title>Document</title>
 </head>
 <body>
+    <script src="./utils.js"></script>
+    <script src="./array.js"></script>
     <script src="./dep.js"></script>
     <script src="./observer.js"></script>
     <script src="./watcher.js"></script>
     <script>
         var person = {
-            name: 'dashan'
+            name: 'dashan',
+            ids: [1, 2, 3]
         }
 
         new Observer(person);
@@ -23,6 +26,9 @@
 
         person.name = 'test'; // test dashan
         person.name = 'test2'; // test2 test
+
+        person.ids.push(4);
+        
     </script>
 </body>
 </html>

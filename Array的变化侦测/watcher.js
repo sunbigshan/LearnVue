@@ -9,10 +9,10 @@ class Watcher {
 
     update() {
         let value = this.get();
-        let oldVal = this.value;
-        if(value !== oldVal) {
-            this.value = value;
-            this.cb.call(this.vm, value, oldVal);
+        if(value !== this.value || isObject(value)) {
+            const oldValue = this.value
+            this.value = value
+            this.cb.call(this.vm, value, oldValue);
         }
     }
 
@@ -20,7 +20,7 @@ class Watcher {
         Dep.target = this;
         let value = this.getter.call(this.vm, this.vm);
         Dep.target = null;
-        return value;
+        return JSON.parse(JSON.stringify(value));
     }
 }
 

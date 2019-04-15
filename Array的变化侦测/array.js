@@ -11,14 +11,10 @@ const arrayMethods = Object.create(arrayProto);
     'reverse'
 ].forEach((method) => {
     const original = arrayProto[method];
-    
-    Object.defineProperty(arrayMethods, method, {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function mutator(...args) {
-            console.log(`触发了${method}`)
-            return original.apply(this, args);
-        }
+    def(arrayMethods, method, function mutator(...args) {
+        const result = original.apply(this, args);
+        const ob = this.__ob__;
+        ob.dep.notify();
+        return result;
     })
 })

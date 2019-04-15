@@ -24,8 +24,11 @@
             console.log(newVal, oldVal);
         })
 
+        new Watcher(person, 'ids', function(newVal, oldVal) {
+            console.log(newVal, oldVal);
+        })
+
         person.name = 'test'; // test dashan
-        person.name = 'test2'; // test2 test
 
         person.ids.push(4);
         
